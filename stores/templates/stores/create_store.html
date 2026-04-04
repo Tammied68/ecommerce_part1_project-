@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Store</title>
+</head>
+<body>
+    <h2>Create Store</h2>
+
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="post" action="">
+        {% csrf_token %}
+
+        <p>
+            <label for="name">Store Name:</label><br>
+            <input type="text" name="name" id="name" required>
+        </p>
+
+        <p>
+            <label for="description">Description:</label><br>
+            <textarea name="description" id="description" rows="4" cols="50" required></textarea>
+        </p>
+
+        <button type="submit">Create Store</button>
+    </form>
+
+    <p><a href="/stores/">Back to Stores</a></p>
+</body>
+</html>

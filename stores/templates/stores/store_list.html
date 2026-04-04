@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Stores</title>
+</head>
+<body>
+    <h2>Your Stores</h2>
+
+    <p>{% url 'create_store' %}Create Store</a>
+
+{% if messages %}
+  <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+    <ul>
+    {% for store in stores %}
+        <li>
+            {{ store.name }}
+            <a href="/stores/edit/{{ store.id }}/">Edit</a>
+            <a href="/stores/delete/{{ store.id }}/">Delete</a>
+            <a href="/products/{{ store.id }}/products/">View Products</a>
+        </li>
+    {% empty %}
+        <li>No stores yet.</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

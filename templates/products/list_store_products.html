@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store Products</title>
+</head>
+<body>
+
+<h2>Products in {{ store.name }}</h2>
+
+<p>
+<a href="/products/{{ store.id }}/products/add/">Add Product</a>
+</p>
+
+<ul>
+{% for product in products %}
+    <li>
+        <strong>{{ product.name }}</strong>
+        - ${{ product.price }}
+
+        <a href="/products/edit/{{ product.id }}/">Edit</a>
+        <a href="/products/delete/{{ product.id }}/">Delete</a>
+    </li>
+{% empty %}
+    <li>No products yet.</li>
+{% endfor %}
+</ul>
+
+<p><a href="/stores/">Back to Stores</a></p>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+</head>
+<body>
+
+<h2>{{ product.name }}</h2>
+
+<p>{{ product.description }}</p>
+
+<p>Store: {{ product.store.name }}</p>
+
+<p>Price: ${{ product.price }}</p>
+
+<a href="/products/add-to-cart/{{ product.id }}/">Add to Cart</a>
+
+<p>
+<a href="/products/review/{{ product.id }}/">Leave Review</a>
+</p>
+
+<h3>Reviews</h3>
+
+{% for review in reviews %}
+
+<div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+
+<strong>{{ review.user.username }}</strong>
+
+{% if review.verified %}
+    (Verified Purchase)
+{% else %}
+    (Unverified)
+{% endif %}
+
+<br>
+
+Rating: {{ review.rating }}
+
+<p>{{ review.comment }}</p>
+
+</div>
+
+{% empty %}
+
+<p>No reviews yet.</p>
+
+{% endfor %}
+
+</body>
+</html>
