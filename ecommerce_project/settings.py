@@ -122,9 +122,9 @@ USE_TZ = True
 # =========================
 # AUTH / LOGIN (USER-FACING)
 # =========================
-LOGIN_REDIRECT_URL = "store_list"
 LOGIN_URL = "/accounts/login/"
-LOGOUT_REDIRECT_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/products/"
+LOGOUT_REDIRECT_URL = "/"
 
 
 # =========================

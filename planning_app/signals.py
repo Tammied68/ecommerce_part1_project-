@@ -4,6 +4,7 @@ from django.dispatch import receiver
 
 from .models import Profile
 
+
 # When a User is created, Django automatically creates a Profile
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

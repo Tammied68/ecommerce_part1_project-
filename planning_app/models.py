@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 '''Contains the Profile model which links users to their
 role (vendor or buyer) within the ecommerce system.'''
 
+
 class Profile(models.Model):
 
     ROLE_CHOICES = [
