@@ -20,6 +20,12 @@ from .models import Profile, Store
 
 @login_required
 def store_list(request):
+
+    """Display the vendor dashboard showing stores owned by the logged-in vendor.
+
+    Redirects non-vendor users to the buyer-facing product browsing page.
+    """
+
     profile = getattr(request.user, "profile", None)
 
     # Buyers and admins should not access vendor dashboards
@@ -32,6 +38,12 @@ def store_list(request):
 
 @login_required
 def create_store(request):
+
+    """Create a new store for the logged-in vendor.
+
+    Vendors can submit a store name/description via POST. Non-vendors are redirected.
+    """
+
     profile = getattr(request.user, "profile", None)
 
     if not profile or profile.role != "vendor":
@@ -51,6 +63,12 @@ def create_store(request):
 
 @login_required
 def edit_store(request, store_id):
+
+    """Edit an existing store owned by the logged-in vendor.
+
+    Only the owner vendor can access this view; other users will receive a 404.
+    """
+
     profile = getattr(request.user, "profile", None)
 
     if not profile or profile.role != "vendor":
@@ -69,6 +87,12 @@ def edit_store(request, store_id):
 
 @login_required
 def delete_store(request, store_id):
+
+    """Delete an existing store owned by the logged-in vendor.
+
+    Confirms deletion via GET and removes the store via POST.
+    """
+
     profile = getattr(request.user, "profile", None)
 
     if not profile or profile.role != "vendor":
@@ -88,9 +112,13 @@ def delete_store(request, store_id):
 # -------------------------
 
 def site_login(request):
+
+    """Authenticate storefront users (buyers/vendors) and block admin logins.
+
+    Admin/staff users are redirected to the Django admin login page.
+    Successful logins redirect to the buyer-facing product browsing page.
     """
-    Custom site login that blocks admin users from storefront access.
-    """
+
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -115,9 +143,12 @@ def site_login(request):
 
 
 def register(request):
+
+    """Register a new buyer or vendor account and create the associated Profile.
+
+    On success, logs the user in and redirects based on role rules.
     """
-    Register a new user account, assign a role, and log the user in.
-    """
+
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         role = request.POST.get("role")

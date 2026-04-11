@@ -78,6 +78,12 @@ def delete_product(request, product_id):
 
 
 def add_to_cart(request, product_id):
+
+    """Add a product to the user's cart.
+
+    Stores cart data in session and redirects back to the cart or product page.
+    """
+
     cart = request.session.get("cart", {})
     cart[str(product_id)] = cart.get(str(product_id), 0) + 1
     request.session["cart"] = cart
@@ -154,7 +160,12 @@ def checkout(request):
 
 
 def browse_products(request):
-    '''Displays all products from all stores so buyers can browse them.'''
+
+    """Display the buyer-facing product listing page.
+
+    Shows available products and provides entry points for login/registration.
+    """
+
     products = Product.objects.select_related("store").all()
 
     return render(request, "products/browse_products.html", {
@@ -163,6 +174,12 @@ def browse_products(request):
 
 
 def product_detail(request, product_id):
+
+    """Display a single product detail page including reviews.
+
+    Loads product information and associated reviews for display.
+    """
+
     product = get_object_or_404(Product, id=product_id)
     reviews = product.reviews.all().order_by("-created_at")
 
@@ -174,6 +191,12 @@ def product_detail(request, product_id):
 
 @login_required
 def leave_review(request, product_id):
+
+    """Allow a logged-in buyer to submit a review for a product.
+
+    Creates a review associated with request.user and the selected product.
+    """
+
     product = get_object_or_404(Product, id=product_id)
 
     if request.method == "POST":
