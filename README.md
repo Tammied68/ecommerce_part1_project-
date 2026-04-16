@@ -1,3 +1,8 @@
+
+## Setup Instructions (MySQL + Django)
+
+### 1. Clone the repository
+
 # eCommerce Application – Practical Task 1
 
 ## Overview
